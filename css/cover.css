@@ -1,0 +1,142 @@
+/* Cover.css - Styles for the cover page */
+
+.cover-container {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    position: relative;
+}
+
+.name-container {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.name-title {
+    font-family: var(--font-secondary);
+    font-size: 6rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.name-word {
+    display: block;
+    transform: translateY(120%);
+    opacity: 0;
+    animation-fill-mode: forwards;
+}
+
+.tagline {
+    overflow: hidden;
+}
+
+.tagline-text {
+    display: inline-block;
+    font-size: 1.2rem;
+    font-weight: 300;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0;
+    transform: translateY(100%);
+    animation-fill-mode: forwards;
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeIn 1s ease 2.5s forwards;
+}
+
+.scroll-arrow {
+    width: 30px;
+    height: 50px;
+    margin: 0 auto;
+    margin-top: 1rem;
+    position: relative;
+    border: 2px solid var(--color-text);
+    border-radius: 15px;
+}
+
+.scroll-arrow::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    width: 6px;
+    height: 6px;
+    margin-left: -3px;
+    background-color: var(--color-text);
+    border-radius: 50%;
+    animation: scrollDown 2s infinite;
+}
+
+@keyframes scrollDown {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(15px);
+        opacity: 0.2;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+    .name-title {
+        font-size: 4.5rem;
+    }
+    
+    .tagline-text {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .name-title {
+        font-size: 3rem;
+    }
+    
+    .tagline-text {
+        font-size: 0.9rem;
+        letter-spacing: 2px;
+    }
+    
+    .scroll-indicator {
+        font-size: 0.8rem;
+    }
+    
+    .scroll-arrow {
+        width: 24px;
+        height: 40px;
+    }
+}

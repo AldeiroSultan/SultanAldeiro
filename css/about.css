@@ -1,0 +1,275 @@
+/* About.css - Styles for the about page */
+
+.about-container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+.about-content {
+    width: 50%;
+    height: 100%;
+    padding: 8rem 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.about-title {
+    font-family: var(--font-secondary);
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.about-description {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.about-description p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+.about-description p:last-child {
+    margin-bottom: 0;
+}
+
+/* Timeline styles */
+.timeline-container {
+    width: 70%;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 8rem 0;
+    display: flex;
+    align-items: center;
+    overflow-x: hidden;
+}
+
+.timeline-hint {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    padding: 0.5rem 1rem;
+    background-color: rgba(230, 57, 70, 0.1);
+    border-radius: 4px;
+    font-size: 0.9rem;
+    color: var(--color-accent);
+    opacity: 0;
+    transform: translateY(20px);
+    z-index: 10;
+}
+
+.timeline {
+    display: flex;
+    min-width: max-content;
+    padding: 2rem 4rem;
+}
+
+.timeline-item {
+    width: 300px;
+    margin-right: 5rem;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.timeline-year {
+    font-family: var(--font-secondary);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    margin-bottom: 1rem;
+}
+
+.timeline-image-container {
+    width: 100%;
+    height: 200px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    border-radius: 4px;
+    filter: grayscale(100%);
+    transition: all 0.5s ease;
+}
+
+.timeline-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.timeline-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    transition: all 0.5s ease;
+}
+
+.timeline-text {
+    font-size: 1rem;
+    opacity: 0.8;
+    transition: all 0.5s ease;
+}
+
+.timeline-item:hover .timeline-image-container {
+    filter: grayscale(0%);
+}
+
+.timeline-item:hover .timeline-image {
+    transform: scale(1.05);
+}
+
+.timeline-item:hover .timeline-title {
+    color: var(--color-accent);
+    transform: translateY(-2px);
+}
+
+.timeline-item:hover .timeline-text {
+    opacity: 1;
+}
+
+.timeline-end {
+    display: flex;
+    align-items: center;
+    padding-left: 2rem;
+    opacity: 0;
+    transform: translateX(30px);
+}
+
+.timeline-end-text {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    white-space: nowrap;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 1200px) {
+    .about-content {
+        padding: 6rem 3rem;
+    }
+    
+    .timeline-container {
+        width: 65%;
+    }
+    
+    .timeline-item {
+        width: 250px;
+        margin-right: 4rem;
+    }
+    
+    .timeline-image-container {
+        height: 160px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .about-container {
+        flex-direction: column;
+        height: auto;
+        overflow: visible;
+    }
+    
+    .about-content {
+        width: 100%;
+        height: auto;
+        padding: 6rem 3rem 3rem;
+    }
+    
+    .timeline-container {
+        position: relative;
+        width: 100%;
+        height: auto;
+        right: auto;
+        top: auto;
+        padding: 3rem 0 6rem;
+    }
+    
+    .timeline-hint {
+        top: 1rem;
+        right: 3rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .about-content {
+        padding: 5rem 2rem 2rem;
+    }
+    
+    .about-title {
+        font-size: 2.8rem;
+    }
+    
+    .about-description p {
+        font-size: 1rem;
+    }
+    
+    .timeline {
+        padding: 1.5rem 2rem;
+    }
+    
+    .timeline-item {
+        width: 220px;
+        margin-right: 3rem;
+    }
+    
+    .timeline-year {
+        font-size: 2rem;
+    }
+    
+    .timeline-title {
+        font-size: 1.1rem;
+    }
+    
+    .timeline-text {
+        font-size: 0.9rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .about-content {
+        padding: 4rem 1.5rem 2rem;
+    }
+    
+    .about-title {
+        font-size: 2.2rem;
+    }
+    
+    .timeline {
+        padding: 1rem 1.5rem;
+    }
+    
+    .timeline-item {
+        width: 200px;
+        margin-right: 2.5rem;
+    }
+    
+    .timeline-year {
+        font-size: 1.8rem;
+    }
+    
+    .timeline-image-container {
+        height: 140px;
+    }
+    
+    .timeline-title {
+        font-size: 1rem;
+    }
+    
+    .timeline-hint {
+        right: 1.5rem;
+        font-size: 0.8rem;
+    }
+    
+    .timeline-end-text {
+        font-size: 1rem;
+    }
+}
