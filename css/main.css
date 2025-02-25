@@ -15,6 +15,10 @@
     --color-accent: #e63946;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 html, body {
     height: 100%;
     width: 100%;
@@ -24,6 +28,11 @@ html, body {
     font-size: 16px;
     line-height: 1.5;
     overflow-x: hidden;
+    overflow-y: auto;
+}
+
+body {
+    transition: opacity 0.3s ease;
 }
 
 a {
@@ -147,6 +156,132 @@ a:hover {
     color: var(--color-accent);
 }
 
+/* Make sure all pages take at least full viewport height */
+.cover-container, .about-container, .projects-container, .contact-container {
+    min-height: 100vh;
+}
+
+/* Style the scroll indicator to be more visible */
+.scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    animation: fadeInOut 2s infinite;
+    z-index: 10;
+}
+
+@keyframes fadeInOut {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+}
+
+.scroll-arrow {
+    width: 30px;
+    height: 50px;
+    margin: 0 auto;
+    margin-top: 1rem;
+    position: relative;
+    border: 2px solid var(--color-text);
+    border-radius: 15px;
+}
+
+.scroll-arrow::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    width: 6px;
+    height: 6px;
+    margin-left: -3px;
+    background-color: var(--color-text);
+    border-radius: 50%;
+    animation: scrollDown 2s infinite;
+}
+
+@keyframes scrollDown {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(15px);
+        opacity: 0.2;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Scroll to top button */
+.scroll-top-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 40px;
+    height: 40px;
+    background-color: var(--color-accent);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    font-size: 1.5rem;
+    z-index: 100;
+}
+
+.scroll-top-btn.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.scroll-top-btn:hover {
+    transform: translateY(-3px);
+}
+
+/* Page transition indicators */
+.page-transition-indicator {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    color: var(--color-accent);
+    opacity: 0.7;
+    transition: all 0.3s ease;
+    z-index: 90;
+    cursor: pointer;
+}
+
+.page-transition-indicator:hover {
+    opacity: 1;
+}
+
+.page-transition-indicator.next {
+    right: 1rem;
+}
+
+.page-transition-indicator.prev {
+    left: 1rem;
+}
+
+/* Create transition indicators */
+.page-transition-indicator.next::after {
+    content: '→';
+}
+
+.page-transition-indicator.prev::after {
+    content: '←';
+}
+
 /* Responsive styles */
 @media screen and (max-width: 768px) {
     .menu-link {
@@ -159,10 +294,117 @@ a:hover {
         width: 40px;
         height: 40px;
     }
+    
+    .menu-icon {
+        width: 20px;
+        height: 16px;
+    }
+    
+    .menu-open .menu-icon span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+    
+    .menu-open .menu-icon span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+    }
+    
+    .scroll-indicator {
+        font-size: 0.8rem;
+    }
+    
+    .scroll-arrow {
+        width: 24px;
+        height: 40px;
+    }
+    
+    .scroll-top-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 1.2rem;
+    }
+    
+    .page-transition-indicator {
+        font-size: 1.5rem;
+    }
 }
 
 @media screen and (max-width: 480px) {
     .menu-link {
         font-size: 2.5rem;
     }
+    
+    .menu-button {
+        top: 1rem;
+        right: 1rem;
+        width: 36px;
+        height: 36px;
+    }
+    
+    .scroll-arrow {
+        width: 20px;
+        height: 34px;
+    }
+    
+    .page-transition-indicator {
+        font-size: 1.2rem;
+    }
+    /* Add these styles to main.css to improve transitions */
+
+/* Page transition indicators - make them more visible */
+.page-transition-indicator {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2.5rem;
+    color: var(--color-accent);
+    background-color: rgba(0, 0, 0, 0.2);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.5;
+    transition: all 0.5s ease;
+    z-index: 95;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.page-transition-indicator:hover {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 0 20px rgba(var(--color-accent), 0.5);
+}
+
+.page-transition-indicator.next {
+    right: 2rem;
+}
+
+.page-transition-indicator.prev {
+    left: 2rem;
+}
+
+/* Slower transitions for the entire body */
+body {
+    transition: opacity 1s ease;
+}
+
+/* Make scroll behavior extra smooth */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Create transition overlay for page changes */
+.page-transition-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-accent);
+    z-index: 9999;
+    opacity: 0;
+    transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+}
 }

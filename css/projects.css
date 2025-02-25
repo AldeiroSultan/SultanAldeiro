@@ -3,17 +3,15 @@
 .projects-container {
     width: 100%;
     min-height: 100vh;
-    padding: 8rem 4rem;
-    position: relative;
+    padding: 6rem 3rem;
+    background: linear-gradient(to bottom, #0a0a0a, #1a1a1a);
 }
 
 .projects-title {
     font-family: var(--font-secondary);
     font-size: 3.5rem;
     font-weight: 700;
-    margin-bottom: 4rem;
-    opacity: 0;
-    transform: translateY(30px);
+    margin-bottom: 3rem;
 }
 
 /* Accordion styles */
@@ -28,8 +26,6 @@
     border-radius: 0.5rem;
     overflow: hidden;
     background-color: rgba(255, 255, 255, 0.03);
-    opacity: 0;
-    transform: translateY(30px);
 }
 
 .accordion-header {
@@ -39,7 +35,6 @@
     padding: 1.5rem 2rem;
     cursor: pointer;
     transition: all 0.3s ease;
-    position: relative;
 }
 
 .accordion-header:hover {
@@ -50,7 +45,6 @@
     font-size: 1.8rem;
     font-weight: 600;
     margin: 0;
-    transition: all 0.3s ease;
 }
 
 .accordion-icon {
@@ -67,7 +61,7 @@
 .accordion-content {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: max-height 0.5s ease;
 }
 
 .accordion-item.active .accordion-content {
@@ -87,15 +81,6 @@
     flex: 1 1 300px;
     border-radius: 0.5rem;
     overflow: hidden;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.3s ease;
-}
-
-.accordion-item.active .project-image-container {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 0.2s;
 }
 
 .project-image {
@@ -111,15 +96,6 @@
 
 .project-info {
     flex: 1 1 300px;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.3s ease;
-}
-
-.accordion-item.active .project-info {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 0.3s;
 }
 
 .project-description {
@@ -160,8 +136,7 @@
 }
 
 .project-link:hover {
-    background-color: var(--color-accent-alt);
-    color: white;
+    background-color: rgba(230, 57, 70, 0.8);
     transform: translateY(-3px);
 }
 
@@ -169,8 +144,6 @@
 .projects-nav {
     margin-top: 4rem;
     text-align: right;
-    opacity: 0;
-    transform: translateY(20px);
 }
 
 .next-link {
@@ -196,96 +169,38 @@
 /* Responsive styles */
 @media screen and (max-width: 992px) {
     .projects-container {
-        padding: 6rem 3rem;
+        padding: 5rem 2rem;
     }
     
     .projects-title {
         font-size: 3rem;
-        margin-bottom: 3rem;
-    }
-    
-    .project-title {
-        font-size: 1.6rem;
-    }
-    
-    .project-description {
-        font-size: 1rem;
     }
 }
 
 @media screen and (max-width: 768px) {
     .projects-container {
-        padding: 5rem 2rem;
+        padding: 4rem 1.5rem;
     }
     
     .projects-title {
-        font-size: 2.8rem;
-        margin-bottom: 2.5rem;
-    }
-    
-    .accordion-header {
-        padding: 1.2rem 1.5rem;
+        font-size: 2.5rem;
     }
     
     .project-title {
-        font-size: 1.4rem;
-    }
-    
-    .accordion-icon {
-        font-size: 1.8rem;
-    }
-    
-    .project-details {
-        padding: 0 1.5rem 1.5rem;
-        gap: 1.5rem;
-    }
-    
-    .project-description {
-        margin-bottom: 1.5rem;
+        font-size: 1.5rem;
     }
 }
 
 @media screen and (max-width: 480px) {
     .projects-container {
-        padding: 4rem 1.5rem;
+        padding: 3rem 1rem;
     }
     
     .projects-title {
-        font-size: 2.2rem;
-        margin-bottom: 2rem;
-    }
-    
-    .accordion-header {
-        padding: 1rem 1.2rem;
+        font-size: 2rem;
     }
     
     .project-title {
-        font-size: 1.2rem;
-    }
-    
-    .accordion-icon {
-        font-size: 1.6rem;
-    }
-    
-    .project-details {
-        padding: 0 1.2rem 1.2rem;
-        gap: 1.2rem;
-    }
-    
-    .project-meta {
-        gap: 1.2rem;
-    }
-    
-    .project-link {
-        padding: 0.7rem 1.5rem;
-        font-size: 0.9rem;
-    }
-    
-    .next-link {
-        font-size: 0.9rem;
-    }
-    
-    .next-text {
         font-size: 1.3rem;
     }
 }

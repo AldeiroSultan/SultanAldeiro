@@ -27,6 +27,29 @@
         </div>
     </main>
 
+    <!-- Additional scrollable content section with bio and image -->
+    <section class="intro-section" id="intro-section">
+        <div class="container">
+            <div class="intro-content">
+                <div class="intro-image-container">
+                    <img src="https://via.placeholder.com/400x500" alt="Sultan Aldeiro" class="intro-image">
+                </div>
+                <div class="intro-text">
+                    <h2>Welcome to My Portfolio</h2>
+                    <p>I am Sultan Aldeiro, a creative developer and digital artist with a passion for merging technology with artistic expression. With a background in both design and development, I create immersive digital experiences that push the boundaries of traditional web design.</p>
+                    <p>My work is centered around the intersection of code and creativity, using modern web technologies to craft visually stunning and interactive experiences.</p>
+                    <div class="intro-nav">
+                        <a href="about.html" class="intro-link">Learn More About Me</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scroll-continue-hint">
+            Scroll to continue to About page
+        </div>
+    </section>
+
     <!-- Navigation menu button -->
     <div class="menu-button">
         <div class="menu-icon">
@@ -50,8 +73,149 @@
         </div>
     </div>
 
+    <!-- Styles for the intro section -->
+    <style>
+        .intro-section {
+            padding: 6rem 3rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: linear-gradient(to bottom, #1a1a1a, #0a0a0a);
+            position: relative;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .intro-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 4rem;
+        }
+        
+        .intro-image-container {
+            flex: 1 1 300px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transform: rotate(-3deg);
+            transition: all 0.5s ease;
+        }
+        
+        .intro-image-container:hover {
+            transform: rotate(0);
+            box-shadow: 0 15px 40px rgba(230, 57, 70, 0.2);
+        }
+        
+        .intro-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: all 0.5s ease;
+        }
+        
+        .intro-text {
+            flex: 1 1 500px;
+        }
+        
+        .intro-section h2 {
+            font-family: var(--font-secondary);
+            font-size: 3rem;
+            margin-bottom: 2rem;
+        }
+        
+        .intro-section p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .intro-nav {
+            margin-top: 3rem;
+        }
+        
+        .intro-link {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: var(--color-accent);
+            color: white;
+            font-weight: 600;
+            border-radius: 0.3rem;
+            transition: all 0.3s ease;
+        }
+        
+        .intro-link:hover {
+            background-color: rgba(230, 57, 70, 0.8);
+            transform: translateY(-3px);
+            color: white;
+        }
+        
+        .scroll-continue-hint {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.9rem;
+            padding: 0.5rem 1.5rem;
+            background-color: rgba(230, 57, 70, 0.1);
+            border-radius: 4px;
+            color: var(--color-accent);
+            animation: fadeInOut 2s infinite;
+        }
+        
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+        
+        @media screen and (max-width: 992px) {
+            .intro-content {
+                gap: 3rem;
+            }
+        }
+        
+        @media screen and (max-width: 768px) {
+            .intro-section {
+                padding: 4rem 2rem;
+            }
+            
+            .intro-section h2 {
+                font-size: 2.5rem;
+            }
+            
+            .intro-section p {
+                font-size: 1.1rem;
+            }
+            
+            .intro-image-container {
+                margin: 0 auto;
+                max-width: 300px;
+            }
+        }
+        
+        @media screen and (max-width: 480px) {
+            .intro-section {
+                padding: 3rem 1.5rem;
+            }
+            
+            .intro-section h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+
+    <!-- Add page transition indicators -->
+    <div class="page-transition-indicator prev"></div>
+    <div class="page-transition-indicator next"></div>
+
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/page-scroll.js"></script>
 </body>
 </html>
