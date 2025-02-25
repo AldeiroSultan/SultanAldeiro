@@ -3,15 +3,14 @@
 .about-container {
     display: flex;
     width: 100%;
-    height: 100vh;
-    overflow: hidden;
-    position: relative;
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #0a0a0a, #1a1a1a);
+    padding: 2rem;
 }
 
 .about-content {
     width: 50%;
-    height: 100%;
-    padding: 8rem 4rem;
+    padding: 6rem 3rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -22,13 +21,6 @@
     font-size: 3.5rem;
     font-weight: 700;
     margin-bottom: 2rem;
-    opacity: 0;
-    transform: translateY(30px);
-}
-
-.about-description {
-    opacity: 0;
-    transform: translateY(30px);
 }
 
 .about-description p {
@@ -43,42 +35,33 @@
 
 /* Timeline styles */
 .timeline-container {
-    width: 70%;
-    height: 100%;
-    position: absolute;
-    right: 0;
-    top: 0;
-    padding: 8rem 0;
+    width: 50%;
+    padding: 6rem 1rem;
     display: flex;
-    align-items: center;
-    overflow-x: hidden;
+    flex-direction: column;
+    justify-content: center;
+    overflow-x: auto;
 }
 
 .timeline-hint {
-    position: absolute;
-    top: 2rem;
-    right: 2rem;
+    margin-bottom: 2rem;
     padding: 0.5rem 1rem;
     background-color: rgba(230, 57, 70, 0.1);
     border-radius: 4px;
     font-size: 0.9rem;
     color: var(--color-accent);
-    opacity: 0;
-    transform: translateY(20px);
-    z-index: 10;
+    align-self: flex-end;
 }
 
 .timeline {
     display: flex;
     min-width: max-content;
-    padding: 2rem 4rem;
+    padding: 1rem;
 }
 
 .timeline-item {
     width: 300px;
-    margin-right: 5rem;
-    opacity: 0;
-    transform: translateY(30px);
+    margin-right: 3rem;
 }
 
 .timeline-year {
@@ -129,19 +112,12 @@
 
 .timeline-item:hover .timeline-title {
     color: var(--color-accent);
-    transform: translateY(-2px);
-}
-
-.timeline-item:hover .timeline-text {
-    opacity: 1;
 }
 
 .timeline-end {
     display: flex;
     align-items: center;
     padding-left: 2rem;
-    opacity: 0;
-    transform: translateX(30px);
 }
 
 .timeline-end-text {
@@ -149,21 +125,37 @@
     font-weight: 600;
     color: var(--color-accent);
     white-space: nowrap;
+    cursor: pointer;
 }
 
 /* Responsive styles */
-@media screen and (max-width: 1200px) {
-    .about-content {
-        padding: 6rem 3rem;
+@media screen and (max-width: 992px) {
+    .about-container {
+        flex-direction: column;
+    }
+    
+    .about-content, .timeline-container {
+        width: 100%;
+        padding: 3rem 2rem;
     }
     
     .timeline-container {
-        width: 65%;
+        padding-top: 0;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .about-title {
+        font-size: 2.8rem;
     }
     
     .timeline-item {
         width: 250px;
-        margin-right: 4rem;
+        margin-right: 2rem;
+    }
+    
+    .timeline-year {
+        font-size: 2rem;
     }
     
     .timeline-image-container {
@@ -171,85 +163,18 @@
     }
 }
 
-@media screen and (max-width: 992px) {
-    .about-container {
-        flex-direction: column;
-        height: auto;
-        overflow: visible;
-    }
-    
-    .about-content {
-        width: 100%;
-        height: auto;
-        padding: 6rem 3rem 3rem;
-    }
-    
-    .timeline-container {
-        position: relative;
-        width: 100%;
-        height: auto;
-        right: auto;
-        top: auto;
-        padding: 3rem 0 6rem;
-    }
-    
-    .timeline-hint {
-        top: 1rem;
-        right: 3rem;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .about-content {
-        padding: 5rem 2rem 2rem;
-    }
-    
-    .about-title {
-        font-size: 2.8rem;
-    }
-    
-    .about-description p {
-        font-size: 1rem;
-    }
-    
-    .timeline {
-        padding: 1.5rem 2rem;
-    }
-    
-    .timeline-item {
-        width: 220px;
-        margin-right: 3rem;
-    }
-    
-    .timeline-year {
-        font-size: 2rem;
-    }
-    
-    .timeline-title {
-        font-size: 1.1rem;
-    }
-    
-    .timeline-text {
-        font-size: 0.9rem;
-    }
-}
-
 @media screen and (max-width: 480px) {
-    .about-content {
-        padding: 4rem 1.5rem 2rem;
+    .about-content, .timeline-container {
+        padding: 2rem 1rem;
     }
     
     .about-title {
         font-size: 2.2rem;
     }
     
-    .timeline {
-        padding: 1rem 1.5rem;
-    }
-    
     .timeline-item {
         width: 200px;
-        margin-right: 2.5rem;
+        margin-right: 1.5rem;
     }
     
     .timeline-year {
@@ -258,18 +183,5 @@
     
     .timeline-image-container {
         height: 140px;
-    }
-    
-    .timeline-title {
-        font-size: 1rem;
-    }
-    
-    .timeline-hint {
-        right: 1.5rem;
-        font-size: 0.8rem;
-    }
-    
-    .timeline-end-text {
-        font-size: 1rem;
     }
 }
