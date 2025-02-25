@@ -29,15 +29,12 @@
     align-items: center;
 }
 
+/* Update these classes in cover.css */
 .name-word {
     display: block;
-    transform: translateY(120%);
-    opacity: 0;
-    animation-fill-mode: forwards;
-}
-
-.tagline {
-    overflow: hidden;
+    /* Remove or modify this line that's hiding content */
+    transform: translateY(0%); /* Change from translateY(120%) */
+    opacity: 1; /* Change from opacity: 0 */
 }
 
 .tagline-text {
@@ -46,9 +43,8 @@
     font-weight: 300;
     letter-spacing: 3px;
     text-transform: uppercase;
-    opacity: 0;
-    transform: translateY(100%);
-    animation-fill-mode: forwards;
+    opacity: 1; /* Change from opacity: 0 */
+    transform: translateY(0%); /* Change from translateY(100%) */
 }
 
 .scroll-indicator {

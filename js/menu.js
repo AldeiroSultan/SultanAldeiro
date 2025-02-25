@@ -2,7 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     // Background animation
-    initBackgroundAnimation();
+    //initBackgroundAnimation();
     
     // Menu functionality
     initMenu();
