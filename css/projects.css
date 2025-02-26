@@ -5,82 +5,109 @@
     min-height: 100vh;
     padding: 6rem 3rem;
     background: linear-gradient(to bottom, #0a0a0a, #1a1a1a);
+    overflow-x: hidden;
 }
 
-.projects-title {
-    font-family: var(--font-secondary);
-    font-size: 3.5rem;
-    font-weight: 700;
-    margin-bottom: 3rem;
-}
-
-/* Accordion styles */
-.accordion-container {
+/* Parallax container */
+.parallax-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
 }
 
-.accordion-item {
-    margin-bottom: 1.5rem;
+/* Project panels */
+.project-panel {
+    width: 100%;
+    margin-bottom: 2rem;
     border-radius: 0.5rem;
     overflow: hidden;
-    background-color: rgba(255, 255, 255, 0.03);
+    background: rgba(255, 255, 255, 0.03);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.accordion-header {
+.project-panel.active {
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+}
+
+.panel-inner {
+    position: relative;
+}
+
+.panel-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.5rem 2rem;
+    padding: 2rem;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
-.accordion-header:hover {
-    background-color: rgba(255, 255, 255, 0.05);
+.panel-header:hover {
+    background: rgba(255, 255, 255, 0.05);
 }
 
 .project-title {
-    font-size: 1.8rem;
-    font-weight: 600;
-    margin: 0;
-}
-
-.accordion-icon {
     font-size: 2rem;
-    font-weight: 300;
-    color: var(--color-accent);
+    margin: 0;
     transition: all 0.3s ease;
 }
 
-.accordion-item.active .accordion-icon {
-    transform: rotate(45deg);
+.panel-indicator {
+    display: flex;
+    align-items: center;
 }
 
-.accordion-content {
-    max-height: 0;
+.indicator-line {
+    width: 30px;
+    height: 2px;
+    background-color: var(--color-accent);
+    margin-right: 1rem;
+    transition: all 0.3s ease;
+}
+
+.indicator-text {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--color-accent);
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.project-panel.active .panel-indicator .indicator-line {
+    transform: rotate(90deg);
+}
+
+.project-panel.active .panel-indicator .indicator-text {
+    opacity: 0;
+}
+
+/* Panel content */
+.panel-content {
+    height: 0;
     overflow: hidden;
-    transition: max-height 0.5s ease;
+    transition: height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.accordion-item.active .accordion-content {
-    max-height: 1000px;
+.project-panel.active .panel-content {
+    height: auto;
 }
 
 .project-details {
-    padding: 0 2rem 2rem;
+    padding: 0 2rem 3rem;
     display: flex;
     flex-wrap: wrap;
-    gap: 2rem;
+    gap: 3rem;
 }
 
 .project-image-container {
-    width: 100%;
-    max-width: 500px;
-    flex: 1 1 300px;
+    flex: 1 1 400px;
     border-radius: 0.5rem;
     overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .project-image {
@@ -91,79 +118,85 @@
 }
 
 .project-image-container:hover .project-image {
-    transform: scale(1.03);
+    transform: scale(1.05);
 }
 
 .project-info {
-    flex: 1 1 300px;
+    flex: 1 1 400px;
+    display: flex;
+    flex-direction: column;
 }
 
-.project-description {
-    font-size: 1.1rem;
-    line-height: 1.7;
+.project-desc {
     margin-bottom: 2rem;
 }
 
-.project-meta {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+.project-desc p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
 }
 
-.project-technologies {
+.project-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.meta-title {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--color-accent);
+    margin-bottom: 0.8rem;
+    letter-spacing: 1px;
+}
+
+.tech-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
 }
 
-.project-technologies span {
+.tech-tags span {
+    display: inline-block;
     padding: 0.4rem 0.8rem;
-    background-color: rgba(255, 255, 255, 0.08);
-    border-radius: 0.3rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 2rem;
     font-size: 0.9rem;
     font-weight: 500;
 }
 
+.role-text, .year-text {
+    font-size: 1.1rem;
+}
+
 .project-link {
-    display: inline-block;
-    padding: 0.8rem 2rem;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.8rem 1.5rem;
     background-color: var(--color-accent);
-    color: white;
-    font-weight: 600;
+    color: #000;
+    font-weight: 500;
     border-radius: 0.3rem;
     transition: all 0.3s ease;
+    margin-top: auto;
     width: fit-content;
 }
 
 .project-link:hover {
-    background-color: rgba(230, 57, 70, 0.8);
+    background-color: var(--color-accent-dark);
     transform: translateY(-3px);
 }
 
-/* Next page navigation */
-.projects-nav {
-    margin-top: 4rem;
-    text-align: right;
+.link-arrow {
+    margin-left: 0.5rem;
+    transition: transform 0.3s ease;
 }
 
-.next-link {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 0.3rem;
-    font-size: 1rem;
-    color: var(--color-text);
-    transition: all 0.3s ease;
-}
-
-.next-link:hover {
-    transform: translateX(5px);
-}
-
-.next-text {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--color-accent);
+.project-link:hover .link-arrow {
+    transform: translateX(3px);
 }
 
 /* Responsive styles */
@@ -172,8 +205,13 @@
         padding: 5rem 2rem;
     }
     
-    .projects-title {
-        font-size: 3rem;
+    .project-title {
+        font-size: 1.8rem;
+    }
+    
+    .project-meta {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
 }
 
@@ -182,12 +220,30 @@
         padding: 4rem 1.5rem;
     }
     
-    .projects-title {
-        font-size: 2.5rem;
+    .panel-header {
+        padding: 1.5rem;
     }
     
     .project-title {
         font-size: 1.5rem;
+    }
+    
+    .indicator-line {
+        width: 20px;
+        margin-right: 0.7rem;
+    }
+    
+    .indicator-text {
+        font-size: 0.7rem;
+    }
+    
+    .project-details {
+        padding: 0 1.5rem 2rem;
+        gap: 2rem;
+    }
+    
+    .project-desc p {
+        font-size: 1rem;
     }
 }
 
@@ -196,11 +252,20 @@
         padding: 3rem 1rem;
     }
     
-    .projects-title {
-        font-size: 2rem;
+    .panel-header {
+        padding: 1.2rem;
     }
     
     .project-title {
         font-size: 1.3rem;
+    }
+    
+    .project-details {
+        padding: 0 1.2rem 1.5rem;
+    }
+    
+    .tech-tags span {
+        font-size: 0.8rem;
+        padding: 0.3rem 0.6rem;
     }
 }

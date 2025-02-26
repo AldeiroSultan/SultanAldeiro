@@ -10,9 +10,13 @@
 :root {
     --font-primary: 'Montserrat', sans-serif;
     --font-secondary: 'Playfair Display', serif;
+    --font-mono: 'Space Mono', monospace;
     --color-background: #0a0a0a;
     --color-text: #ffffff;
-    --color-accent: #e63946;
+    --color-accent: #FF7D1A;
+    --color-accent-light: rgba(255, 125, 26, 0.2);
+    --color-accent-dark: #d86200;
+    --transition-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 html {
@@ -28,11 +32,11 @@ html, body {
     font-size: 16px;
     line-height: 1.5;
     overflow-x: hidden;
-    overflow-y: auto;
 }
 
 body {
-    transition: opacity 0.3s ease;
+    transition: opacity 1s ease;
+    position: relative;
 }
 
 a {
@@ -45,6 +49,37 @@ a:hover {
     color: var(--color-accent);
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-secondary);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+p {
+    margin-bottom: 1rem;
+}
+
+/* Common page elements */
+.page-header {
+    padding: 3rem 0 2rem;
+    margin-bottom: 2rem;
+    position: relative;
+    text-align: center;
+}
+
+.page-title {
+    font-size: 3.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.page-subtitle {
+    font-family: var(--font-mono);
+    color: var(--color-accent);
+    font-size: 1rem;
+    letter-spacing: 2px;
+}
+
 /* Menu button styles */
 .menu-button {
     position: fixed;
@@ -53,7 +88,8 @@ a:hover {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 125, 26, 0.1);
+    border: 1px solid var(--color-accent);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -63,7 +99,7 @@ a:hover {
 }
 
 .menu-button:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 125, 26, 0.2);
 }
 
 .menu-icon {
@@ -79,7 +115,7 @@ a:hover {
     display: block;
     width: 100%;
     height: 2px;
-    background-color: var(--color-text);
+    background-color: var(--color-accent);
     transition: all 0.3s ease;
 }
 
@@ -102,12 +138,14 @@ a:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(10, 10, 10, 0.95);
+    background-color: rgba(10, 10, 10, 0.97);
+    backdrop-filter: blur(5px);
     z-index: 998;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s ease;
+    transition: all 0.5s ease;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -117,8 +155,32 @@ a:hover {
     visibility: visible;
 }
 
+.menu-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    position: absolute;
+    top: 3rem;
+    width: 100%;
+}
+
+.menu-logo {
+    font-family: var(--font-secondary);
+    font-size: 2rem;
+    color: var(--color-accent);
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+}
+
+.menu-title {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--color-text);
+    letter-spacing: 2px;
+}
+
 .menu-content {
     text-align: center;
+    position: relative;
 }
 
 .menu-nav ul {
@@ -126,20 +188,44 @@ a:hover {
 }
 
 .menu-nav li {
-    margin: 2rem 0;
+    margin: 1.5rem 0;
 }
 
 .menu-link {
-    font-family: var(--font-secondary);
-    font-size: 4rem;
-    font-weight: 700;
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    transition: all 0.3s ease;
 }
 
-.menu-link::after {
+.menu-icon-box {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--color-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--color-accent);
+    margin-right: 1rem;
+    transition: all 0.3s ease;
+}
+
+.menu-text {
+    font-family: var(--font-secondary);
+    font-size: 2.5rem;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.menu-text::after {
     content: '';
     position: absolute;
-    bottom: 0;
+    bottom: -5px;
     left: 0;
     width: 0;
     height: 2px;
@@ -147,105 +233,34 @@ a:hover {
     transition: all 0.3s ease;
 }
 
-.menu-link:hover::after,
-.menu-link.active::after {
+.menu-link:hover .menu-text::after,
+.menu-link.active .menu-text::after {
     width: 100%;
 }
 
-.menu-link.active {
+.menu-link:hover .menu-icon-box,
+.menu-link.active .menu-icon-box {
+    background-color: var(--color-accent);
+    color: var(--color-background);
+}
+
+.menu-link.active .menu-text {
     color: var(--color-accent);
 }
 
-/* Make sure all pages take at least full viewport height */
-.cover-container, .about-container, .projects-container, .contact-container {
-    min-height: 100vh;
-}
-
-/* Style the scroll indicator to be more visible */
-.scroll-indicator {
+.menu-footer {
     position: absolute;
     bottom: 2rem;
+    width: 100%;
     text-align: center;
-    font-size: 0.9rem;
-    font-weight: 400;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    cursor: pointer;
-    animation: fadeInOut 2s infinite;
-    z-index: 10;
 }
 
-@keyframes fadeInOut {
-    0%, 100% { opacity: 0.7; }
-    50% { opacity: 1; }
-}
-
-.scroll-arrow {
-    width: 30px;
-    height: 50px;
-    margin: 0 auto;
-    margin-top: 1rem;
-    position: relative;
-    border: 2px solid var(--color-text);
-    border-radius: 15px;
-}
-
-.scroll-arrow::before {
-    content: '';
-    position: absolute;
-    top: 10px;
-    left: 50%;
-    width: 6px;
-    height: 6px;
-    margin-left: -3px;
-    background-color: var(--color-text);
-    border-radius: 50%;
-    animation: scrollDown 2s infinite;
-}
-
-@keyframes scrollDown {
-    0% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-    50% {
-        transform: translateY(15px);
-        opacity: 0.2;
-    }
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-/* Scroll to top button */
-.scroll-top-btn {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    width: 40px;
-    height: 40px;
-    background-color: var(--color-accent);
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-    font-size: 1.5rem;
-    z-index: 100;
-}
-
-.scroll-top-btn.visible {
-    opacity: 1;
-    visibility: visible;
-}
-
-.scroll-top-btn:hover {
-    transform: translateY(-3px);
+.menu-timeline {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--color-text);
+    letter-spacing: 1px;
+    opacity: 0.5;
 }
 
 /* Page transition indicators */
@@ -253,128 +268,21 @@ a:hover {
     position: fixed;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 2rem;
+    width: 60px;
+    height: 60px;
+    background-color: rgba(255, 125, 26, 0.1);
+    border: 1px solid var(--color-accent);
     color: var(--color-accent);
-    opacity: 0.7;
-    transition: all 0.3s ease;
-    z-index: 90;
-    cursor: pointer;
-}
-
-.page-transition-indicator:hover {
-    opacity: 1;
-}
-
-.page-transition-indicator.next {
-    right: 1rem;
-}
-
-.page-transition-indicator.prev {
-    left: 1rem;
-}
-
-/* Create transition indicators */
-.page-transition-indicator.next::after {
-    content: '→';
-}
-
-.page-transition-indicator.prev::after {
-    content: '←';
-}
-
-/* Responsive styles */
-@media screen and (max-width: 768px) {
-    .menu-link {
-        font-size: 3rem;
-    }
-    
-    .menu-button {
-        top: 1.5rem;
-        right: 1.5rem;
-        width: 40px;
-        height: 40px;
-    }
-    
-    .menu-icon {
-        width: 20px;
-        height: 16px;
-    }
-    
-    .menu-open .menu-icon span:nth-child(1) {
-        transform: translateY(7px) rotate(45deg);
-    }
-    
-    .menu-open .menu-icon span:nth-child(3) {
-        transform: translateY(-7px) rotate(-45deg);
-    }
-    
-    .scroll-indicator {
-        font-size: 0.8rem;
-    }
-    
-    .scroll-arrow {
-        width: 24px;
-        height: 40px;
-    }
-    
-    .scroll-top-btn {
-        width: 36px;
-        height: 36px;
-        font-size: 1.2rem;
-    }
-    
-    .page-transition-indicator {
-        font-size: 1.5rem;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .menu-link {
-        font-size: 2.5rem;
-    }
-    
-    .menu-button {
-        top: 1rem;
-        right: 1rem;
-        width: 36px;
-        height: 36px;
-    }
-    
-    .scroll-arrow {
-        width: 20px;
-        height: 34px;
-    }
-    
-    .page-transition-indicator {
-        font-size: 1.2rem;
-    }
-    /* Add these styles to main.css to improve transitions */
-
-/* Page transition indicators - make them more visible */
-.page-transition-indicator {
-    position: fixed;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 2.5rem;
-    color: var(--color-accent);
-    background-color: rgba(0, 0, 0, 0.2);
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 0.5;
-    transition: all 0.5s ease;
-    z-index: 95;
     cursor: pointer;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 90;
+    transition: all 0.3s ease;
 }
 
 .page-transition-indicator:hover {
-    opacity: 1;
-    transform: translateY(-50%) scale(1.1);
-    box-shadow: 0 0 20px rgba(var(--color-accent), 0.5);
+    background-color: rgba(255, 125, 26, 0.2);
 }
 
 .page-transition-indicator.next {
@@ -385,26 +293,39 @@ a:hover {
     left: 2rem;
 }
 
-/* Slower transitions for the entire body */
-body {
-    transition: opacity 1s ease;
+.indicator-text {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 1px;
 }
 
-/* Make scroll behavior extra smooth */
-html {
-    scroll-behavior: smooth;
-}
-
-/* Create transition overlay for page changes */
+/* Page transition overlay */
 .page-transition-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: var(--color-accent);
+    background-color: var(--color-background);
     z-index: 9999;
-    opacity: 0;
-    transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+    transform: translateY(100%);
+    pointer-events: none;
 }
+
+/* Common container styles */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Visual effects */
+.noise-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAgAElEQVR4nJy9B5hkV3Uu+u99TuVQOU/PdE/OQdJIo5xGEiAkkIQEAhvzhNHFvocv2Phh4+DraxNesPG1baX3bN0LtmyDAZtgQCAJlEcaSaPJeSbP9HRXrq46Ya/3r6o+jcp89N5pqqu7zzl77/Wtb61/rfVvhv90sN1uY9SdgcE01A7HQkMWi1Vws8qGYZIaQPtQSlcTkm0TSz++9KnfPH/1uYc65QqyuowDH74PkwuzkGWJ7EsGpimQYRiEQoJQO2yKoJHuCiPk9xDf80c4oSGZDKGhc3SEjBNBgJomxOu4jkO6pnZlQTiVi4/Xo+vTcpxl3bNe1A4e/uDh1197tZhbukNYgd3fXP7I8kMPf3ZbIb81nk2npFpJQdCvbvvsXb/61Fe2JZ9LYOzQiF4uKQiGfVRMJzD9XIIYgdWaSWiCXAr3hOB6vYT3mQZg/qWJU/z7rvqEUC8QbJtbbzXJPx5P2Xgx9+n9Bw+9u1TWE3YLvsHRruJf/uDN7/67Tz7xxPvvyOVX4rrJ4TnOX/zd5z754fu/+M+3XnvkruhInKxbnEzNTMK4dBZdwSi5cfcIff30BDlx7BgxVJ0YpoGm5RD2yd3hPp989G5ywZFLzlTwDDHJV7905+y/v/iG7a3bWM0u0OW5lbu/9uXP/2Jq6tJ+y3Q8c+Njtfml+XMdQbiykK/YhmUgPdCpX/PeGx+fnBpbfsfNwuaLJ8dZpaDTPKGIRNO4KhF6rFxfnRgN9bRKhVq5UWsYQhKkvbWJfLHZgmUHfO994FD/bdc/8Mb9dz9KTp3NW9NTa/C6Ai2h2Qg5JmxsXE/rlSaoJMDSjH9WJF9D1VsmRf3Yq9d9J9vf93Ozp/nD4OiOw48/9NAdbz46/dpsduakHfZ5K33RbsXf0+/f1dd/Vy6/8nPl4lPqPe/vfD3iqdixYAhSNmPHZ6ZL2NLfTVzO93K+aAjJkPHGxBLZODQA1+u1r9g2uPuLT8zecd83p7eePHN+d7VcsXK5Ejn63DG4HAlO26Dtlonf5qYVMkF4Nv+WYTfMprU/Go0f+eK9P/z87MxjVyLe6J96/Ik3fjQ9d3IwFA/Dkf2t+flsMdJhuOVqFY7vGKl9bWbhbMfyWsXf0WO0DdBnj71GNu3eDBmOUbVLJ5VkNk1PTr9Jdu2P0e7ubiuXL3Hj22qxOLJxdOxQZj5X+OqDD/9y37bd8xtSnTOdQs6sFmzXIw+vLxrdGzrI0vQsdQ3B8vuDhKJtimJtZb1NXM6hR2Fy4sQJsmX3Bhx8xzB55+238x8ymZyr56M67AxHgL5eH44fPoTBwR6hO9xP3nj9CN20dTM8DpWvXXWcaI1KiS5nqxRsH')
 }

@@ -6,24 +6,63 @@
     <title>Sultan Aldeiro | Portfolio</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/cover.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@400;700&family=Space+Mono:wght@400;700&family=Archivo+Black&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="noise-overlay"></div>
+    <div class="scan-line"></div>
+    <div class="retro-vignette"></div>
+    
     <!-- Main content -->
     <main class="cover-container">
+        <div class="tva-logo">
+            <svg viewBox="0 0 100 100" class="tva-logo-svg">
+                <circle cx="50" cy="50" r="45" class="tva-logo-circle" />
+                <path d="M35 30 L65 30 L50 70 Z" class="tva-logo-triangle" />
+            </svg>
+        </div>
+        
         <div class="name-container">
-            <h1 class="name-title">
-                <span class="name-word">SULTAN</span>
-                <span class="name-word">ALDEIRO</span>
-            </h1>
+            <div class="tva-ticker">
+                <div class="ticker-text">WELCOME TO THE PORTFOLIO • CREATIVE DEVELOPER • DIGITAL ARTIST</div>
+            </div>
+            
+            <div class="name-glitch-container">
+                <h1 class="name-title">
+                    <div class="name-word-container">
+                        <span class="name-word" data-text="SULTAN">SULTAN</span>
+                    </div>
+                    <div class="name-word-container">
+                        <span class="name-word" data-text="ALDEIRO">ALDEIRO</span>
+                    </div>
+                </h1>
+            </div>
+            
             <div class="tagline">
                 <span class="tagline-text">Creative Developer & Digital Artist</span>
+                <span class="tva-designation">TIMELINE ARCHITECT</span>
+            </div>
+            
+            <div class="tva-typing">
+                <div class="typewriter-text">FOR ALL CREATIVITY. ALWAYS.</div>
             </div>
         </div>
         
         <div class="scroll-indicator">
             <span>Scroll to explore</span>
             <div class="scroll-arrow"></div>
+        </div>
+        
+        <div class="tva-counter">
+            <div class="counter-wrapper">
+                <span class="counter-label">TIMELINE:</span>
+                <div class="counter-digits">
+                    <span class="digit">2</span>
+                    <span class="digit">0</span>
+                    <span class="digit">2</span>
+                    <span class="digit">5</span>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -32,21 +71,38 @@
         <div class="container">
             <div class="intro-content">
                 <div class="intro-image-container">
+                    <div class="tva-frame"></div>
                     <img src="https://via.placeholder.com/400x500" alt="Sultan Aldeiro" class="intro-image">
+                    <div class="tva-id-card">
+                        <div class="id-header">PORTFOLIO ID: SA-25</div>
+                        <div class="id-name">ALDEIRO, SULTAN</div>
+                        <div class="id-position">CREATIVE DEVELOPER</div>
+                        <div class="id-clearance">DIGITAL ARTIST</div>
+                    </div>
                 </div>
                 <div class="intro-text">
-                    <h2>Welcome to My Portfolio</h2>
-                    <p>I am Sultan Aldeiro, a creative developer and digital artist with a passion for merging technology with artistic expression. With a background in both design and development, I create immersive digital experiences that push the boundaries of traditional web design.</p>
-                    <p>My work is centered around the intersection of code and creativity, using modern web technologies to craft visually stunning and interactive experiences.</p>
+                    <h2 class="section-title">About Me</h2>
+                    
+                    <div class="intro-bio">
+                        <p class="typewriter-paragraph">I am Sultan Aldeiro, a creative developer and digital artist with a passion for merging technology with artistic expression. With a background in both design and development, I create immersive digital experiences that push the boundaries of traditional web design.</p>
+                        <p class="typewriter-paragraph">My work is centered around the intersection of code and creativity, using modern web technologies to craft visually stunning and interactive experiences.</p>
+                    </div>
+                    
                     <div class="intro-nav">
-                        <a href="about.html" class="intro-link">Learn More About Me</a>
+                        <a href="about.html" class="intro-link">
+                            <span class="link-text">VIEW FULL PROFILE</span>
+                            <svg class="link-arrow" viewBox="0 0 24 24">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
         
         <div class="scroll-continue-hint">
-            Scroll to continue to About page
+            <div class="hint-text">VIEW MY WORK</div>
+            <div class="hint-arrow"></div>
         </div>
     </section>
 
@@ -62,160 +118,45 @@
     <!-- Full-screen menu -->
     <div class="menu-overlay">
         <div class="menu-content">
+            <div class="menu-header">
+                <div class="menu-logo">SA</div>
+                <div class="menu-title">NAVIGATION</div>
+            </div>
             <nav class="menu-nav">
                 <ul>
-                    <li><a href="index.html" class="menu-link active">Home</a></li>
-                    <li><a href="about.html" class="menu-link">About</a></li>
-                    <li><a href="projects.html" class="menu-link">Projects</a></li>
-                    <li><a href="contact.html" class="menu-link">Contact</a></li>
+                    <li><a href="index.html" class="menu-link active">
+                        <span class="menu-icon-box">01</span>
+                        <span class="menu-text">Home</span>
+                    </a></li>
+                    <li><a href="about.html" class="menu-link">
+                        <span class="menu-icon-box">02</span>
+                        <span class="menu-text">About</span>
+                    </a></li>
+                    <li><a href="projects.html" class="menu-link">
+                        <span class="menu-icon-box">03</span>
+                        <span class="menu-text">Projects</span>
+                    </a></li>
+                    <li><a href="contact.html" class="menu-link">
+                        <span class="menu-icon-box">04</span>
+                        <span class="menu-text">Contact</span>
+                    </a></li>
                 </ul>
             </nav>
+            <div class="menu-footer">
+                <div class="menu-timeline">TIMELINE: 2025</div>
+            </div>
         </div>
     </div>
 
-    <!-- Styles for the intro section -->
-    <style>
-        .intro-section {
-            padding: 6rem 3rem;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            background: linear-gradient(to bottom, #1a1a1a, #0a0a0a);
-            position: relative;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            width: 100%;
-        }
-        
-        .intro-content {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 4rem;
-        }
-        
-        .intro-image-container {
-            flex: 1 1 300px;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            transform: rotate(-3deg);
-            transition: all 0.5s ease;
-        }
-        
-        .intro-image-container:hover {
-            transform: rotate(0);
-            box-shadow: 0 15px 40px rgba(230, 57, 70, 0.2);
-        }
-        
-        .intro-image {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: all 0.5s ease;
-        }
-        
-        .intro-text {
-            flex: 1 1 500px;
-        }
-        
-        .intro-section h2 {
-            font-family: var(--font-secondary);
-            font-size: 3rem;
-            margin-bottom: 2rem;
-        }
-        
-        .intro-section p {
-            font-size: 1.2rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-        
-        .intro-nav {
-            margin-top: 3rem;
-        }
-        
-        .intro-link {
-            display: inline-block;
-            padding: 1rem 2rem;
-            background-color: var(--color-accent);
-            color: white;
-            font-weight: 600;
-            border-radius: 0.3rem;
-            transition: all 0.3s ease;
-        }
-        
-        .intro-link:hover {
-            background-color: rgba(230, 57, 70, 0.8);
-            transform: translateY(-3px);
-            color: white;
-        }
-        
-        .scroll-continue-hint {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.9rem;
-            padding: 0.5rem 1.5rem;
-            background-color: rgba(230, 57, 70, 0.1);
-            border-radius: 4px;
-            color: var(--color-accent);
-            animation: fadeInOut 2s infinite;
-        }
-        
-        @keyframes fadeInOut {
-            0%, 100% { opacity: 0.7; }
-            50% { opacity: 1; }
-        }
-        
-        @media screen and (max-width: 992px) {
-            .intro-content {
-                gap: 3rem;
-            }
-        }
-        
-        @media screen and (max-width: 768px) {
-            .intro-section {
-                padding: 4rem 2rem;
-            }
-            
-            .intro-section h2 {
-                font-size: 2.5rem;
-            }
-            
-            .intro-section p {
-                font-size: 1.1rem;
-            }
-            
-            .intro-image-container {
-                margin: 0 auto;
-                max-width: 300px;
-            }
-        }
-        
-        @media screen and (max-width: 480px) {
-            .intro-section {
-                padding: 3rem 1.5rem;
-            }
-            
-            .intro-section h2 {
-                font-size: 2rem;
-            }
-        }
-    </style>
-
-    <!-- Add page transition indicators -->
-    <div class="page-transition-indicator prev"></div>
-    <div class="page-transition-indicator next"></div>
+    <!-- Page transition indicators -->
+    <div class="page-transition-indicator next"><span class="indicator-text">NEXT</span></div>
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/TextPlugin.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/cover.js"></script>
     <script src="js/page-scroll.js"></script>
 </body>
 </html>

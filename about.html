@@ -6,245 +6,164 @@
     <title>About | Sultan Aldeiro</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/about.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        /* Restructure about page for horizontal scrolling */
-        .about-container {
-            width: 100%;
-            height: 100vh;
-            overflow: hidden;
-            position: relative;
-            padding: 0;
-        }
-        
-        .horizontal-scroll-container {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            scrollbar-width: thin;
-            scrollbar-color: var(--color-accent) rgba(255,255,255,0.1);
-        }
-        
-        .horizontal-scroll-container::-webkit-scrollbar {
-            height: 8px;
-        }
-        
-        .horizontal-scroll-container::-webkit-scrollbar-track {
-            background: rgba(255,255,255,0.1);
-            border-radius: 4px;
-        }
-        
-        .horizontal-scroll-container::-webkit-scrollbar-thumb {
-            background-color: var(--color-accent);
-            border-radius: 4px;
-        }
-        
-        .about-content {
-            min-width: 100vw;
-            height: 100%;
-            padding: 8rem 4rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        
-        .about-flex-container {
-            display: flex;
-            align-items: center;
-            gap: 4rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .about-image-container {
-            flex: 0 0 40%;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            position: relative;
-        }
-        
-        .about-image {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: all 0.5s ease;
-        }
-        
-        .about-text {
-            flex: 0 0 60%;
-        }
-        
-        .about-title {
-            font-family: var(--font-secondary);
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 2rem;
-        }
-        
-        .about-description p {
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-            line-height: 1.7;
-        }
-        
-        .timeline {
-            display: flex;
-            padding: 0 4rem;
-        }
-        
-        .timeline-item {
-            min-width: 300px;
-            margin-right: 5rem;
-        }
-        
-        /* Visual indicator at the end of timeline */
-        .timeline-end {
-            display: flex;
-            align-items: center;
-            padding-left: 2rem;
-            min-width: 200px;
-            position: relative;
-        }
-        
-        .timeline-end::after {
-            content: '→';
-            position: absolute;
-            right: -30px;
-            font-size: 2rem;
-            color: var(--color-accent);
-            animation: bounceRight 2s infinite;
-        }
-        
-        @keyframes bounceRight {
-            0%, 100% { transform: translateX(0); }
-            50% { transform: translateX(10px); }
-        }
-        
-        /* Scroll hint */
-        .scroll-hint {
-            position: fixed;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 0.5rem 1.5rem;
-            background-color: rgba(230, 57, 70, 0.1);
-            border-radius: 4px;
-            font-size: 0.9rem;
-            color: var(--color-accent);
-            z-index: 10;
-            opacity: 0;
-            animation: fadeIn 1s ease 1s forwards;
-        }
-        
-        @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-        }
-        
-        /* Responsive adjustments */
-        @media screen and (max-width: 992px) {
-            .about-flex-container {
-                flex-direction: column;
-                gap: 3rem;
-            }
-            
-            .about-image-container {
-                flex: 0 0 auto;
-                max-width: 400px;
-                width: 100%;
-            }
-            
-            .about-text {
-                flex: 0 0 auto;
-                width: 100%;
-            }
-        }
-        
-        @media screen and (max-width: 768px) {
-            .about-content {
-                padding: 6rem 2rem;
-            }
-            
-            .about-title {
-                font-size: 2.8rem;
-            }
-            
-            .timeline-item {
-                min-width: 250px;
-                margin-right: 3rem;
-            }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="noise-overlay"></div>
+    <div class="scan-line"></div>
+    <div class="retro-vignette"></div>
+    
     <!-- Main content -->
     <main class="about-container">
+        <div class="page-header">
+            <div class="header-content">
+                <h1 class="page-title">About</h1>
+                <div class="page-subtitle">My Story & Timeline</div>
+            </div>
+        </div>
+        
         <div class="horizontal-scroll-container">
-            <!-- About content as first section -->
-            <div class="about-content">
-                <div class="about-flex-container">
-                    <div class="about-image-container">
-                        <img src="https://via.placeholder.com/500x700" alt="Sultan Aldeiro" class="about-image">
+            <!-- About Me Section -->
+            <div class="horizontal-section about-section">
+                <div class="section-inner">
+                    <div class="section-header">
+                        <h2 class="section-title">PERSONAL PROFILE</h2>
+                        <div class="section-line"></div>
                     </div>
-                    <div class="about-text">
-                        <h1 class="about-title">About Me</h1>
-                        <div class="about-description">
-                            <p>I am Sultan Aldeiro, a creative developer and digital artist with a passion for merging technology with artistic expression. With a background in both design and development, I create immersive digital experiences that push the boundaries of traditional web design.</p>
-                            <p>My work is centered around the intersection of code and creativity, using modern web technologies to craft visually stunning and interactive experiences.</p>
-                            <p>Explore my journey through the timeline, discover my projects, and get in touch for potential collaborations.</p>
+                    
+                    <div class="about-flex-container">
+                        <div class="about-image-container">
+                            <div class="tva-frame"></div>
+                            <img src="https://via.placeholder.com/500x700" alt="Sultan Aldeiro" class="about-image">
+                            <div class="tva-id-card">
+                                <div class="id-header">PORTFOLIO ID: SA-25</div>
+                                <div class="id-name">ALDEIRO, SULTAN</div>
+                                <div class="id-position">CREATIVE DEVELOPER</div>
+                                <div class="id-clearance">DIGITAL ARTIST</div>
+                            </div>
+                        </div>
+                        
+                        <div class="about-text">
+                            <div class="file-heading">
+                                <span class="file-label">PROFILE:</span>
+                                <span class="file-name">SULTAN_ALDEIRO</span>
+                            </div>
+                            
+                            <div class="data-table">
+                                <div class="data-row">
+                                    <div class="data-label">NAME:</div>
+                                    <div class="data-value">SULTAN ALDEIRO</div>
+                                </div>
+                                <div class="data-row">
+                                    <div class="data-label">POSITION:</div>
+                                    <div class="data-value">CREATIVE DEVELOPER</div>
+                                </div>
+                                <div class="data-row">
+                                    <div class="data-label">SPECIALTY:</div>
+                                    <div class="data-value">INTERACTIVE DESIGN</div>
+                                </div>
+                                <div class="data-row">
+                                    <div class="data-label">STATUS:</div>
+                                    <div class="data-value status-active">ACTIVE</div>
+                                </div>
+                            </div>
+                            
+                            <div class="about-description">
+                                <p class="description-text">I am Sultan Aldeiro, a creative developer and digital artist with a passion for merging technology with artistic expression. With a background in both design and development, I create immersive digital experiences that push the boundaries of traditional web design.</p>
+                                <p class="description-text">My work is centered around the intersection of code and creativity, using modern web technologies to craft visually stunning and interactive experiences.</p>
+                                <p class="description-text">Explore my journey through the timeline, discover my projects, and get in touch for potential collaborations.</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                
-                <div class="scroll-hint">
-                    <span>Scroll Right to See My Journey →</span>
+                    
+                    <div class="horizontal-scroll-hint">
+                        <div class="hint-text">SCROLL RIGHT TO VIEW TIMELINE</div>
+                        <div class="hint-arrow"></div>
+                    </div>
                 </div>
             </div>
             
-            <!-- Timeline section -->
-            <div class="timeline">
-                <!-- Timeline items -->
-                <div class="timeline-item">
-                    <div class="timeline-year">2018</div>
-                    <div class="timeline-image-container">
-                        <img src="https://via.placeholder.com/400x320" alt="Graduated from Design School" class="timeline-image">
+            <!-- Timeline Section -->
+            <div class="horizontal-section timeline-section">
+                <div class="section-inner">
+                    <div class="section-header">
+                        <h2 class="section-title">MY JOURNEY</h2>
+                        <div class="section-line"></div>
                     </div>
-                    <h3 class="timeline-title">Graduated from Design School</h3>
-                    <p class="timeline-text">Bachelor's degree in Interactive Media Design with honors.</p>
-                </div>
+                    
+                    <div class="timeline-container">
+                        <div class="timeline-axis"></div>
+                        
+                        <!-- Timeline items -->
+                        <div class="timeline-item">
+                            <div class="time-marker">
+                                <div class="marker-dot"></div>
+                                <div class="marker-line"></div>
+                                <div class="time-year">2018</div>
+                            </div>
+                            <div class="time-content">
+                                <div class="time-image-container">
+                                    <img src="https://via.placeholder.com/400x320" alt="Graduated from Design School" class="time-image">
+                                </div>
+                                <h3 class="time-title">Graduated from Design School</h3>
+                                <p class="time-text">Bachelor's degree in Interactive Media Design with honors.</p>
+                                <div class="time-status">KEY MILESTONE</div>
+                            </div>
+                        </div>
 
-                <div class="timeline-item">
-                    <div class="timeline-year">2020</div>
-                    <div class="timeline-image-container">
-                        <img src="https://via.placeholder.com/400x320" alt="Freelance Journey Begins" class="timeline-image">
-                    </div>
-                    <h3 class="timeline-title">Freelance Journey Begins</h3>
-                    <p class="timeline-text">Started taking on independent client projects.</p>
-                </div>
+                        <div class="timeline-item">
+                            <div class="time-marker">
+                                <div class="marker-dot"></div>
+                                <div class="marker-line"></div>
+                                <div class="time-year">2020</div>
+                            </div>
+                            <div class="time-content">
+                                <div class="time-image-container">
+                                    <img src="https://via.placeholder.com/400x320" alt="Freelance Journey Begins" class="time-image">
+                                </div>
+                                <h3 class="time-title">Freelance Journey Begins</h3>
+                                <p class="time-text">Started taking on independent client projects.</p>
+                                <div class="time-status">KEY MILESTONE</div>
+                            </div>
+                        </div>
 
-                <div class="timeline-item">
-                    <div class="timeline-year">2022</div>
-                    <div class="timeline-image-container">
-                        <img src="https://via.placeholder.com/400x320" alt="Founded Studio" class="timeline-image">
-                    </div>
-                    <h3 class="timeline-title">Founded Studio</h3>
-                    <p class="timeline-text">Established a creative digital studio focused on innovative web experiences.</p>
-                </div>
+                        <div class="timeline-item">
+                            <div class="time-marker">
+                                <div class="marker-dot"></div>
+                                <div class="marker-line"></div>
+                                <div class="time-year">2022</div>
+                            </div>
+                            <div class="time-content">
+                                <div class="time-image-container">
+                                    <img src="https://via.placeholder.com/400x320" alt="Founded Studio" class="time-image">
+                                </div>
+                                <h3 class="time-title">Founded Studio</h3>
+                                <p class="time-text">Established a creative digital studio focused on innovative web experiences.</p>
+                                <div class="time-status">KEY MILESTONE</div>
+                            </div>
+                        </div>
 
-                <div class="timeline-item">
-                    <div class="timeline-year">2024</div>
-                    <div class="timeline-image-container">
-                        <img src="https://via.placeholder.com/400x320" alt="Current Work" class="timeline-image">
+                        <div class="timeline-item">
+                            <div class="time-marker">
+                                <div class="marker-dot"></div>
+                                <div class="marker-line"></div>
+                                <div class="time-year">2025</div>
+                            </div>
+                            <div class="time-content">
+                                <div class="time-image-container">
+                                    <img src="https://via.placeholder.com/400x320" alt="Current Work" class="time-image">
+                                </div>
+                                <h3 class="time-title">Current Work</h3>
+                                <p class="time-text">Focusing on experimental web experiences and digital art installations.</p>
+                                <div class="time-status">CURRENT FOCUS</div>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-end">
+                            <div class="end-text">EXPLORE PROJECTS</div>
+                            <div class="end-arrow"></div>
+                        </div>
                     </div>
-                    <h3 class="timeline-title">Current Work</h3>
-                    <p class="timeline-text">Focusing on experimental web experiences and digital art installations.</p>
-                </div>
-                
-                <div class="timeline-end">
-                    <span class="timeline-end-text">Continue to Projects →</span>
                 </div>
             </div>
         </div>
@@ -262,24 +181,44 @@
     <!-- Full-screen menu -->
     <div class="menu-overlay">
         <div class="menu-content">
+            <div class="menu-header">
+                <div class="menu-logo">SA</div>
+                <div class="menu-title">NAVIGATION</div>
+            </div>
             <nav class="menu-nav">
                 <ul>
-                    <li><a href="index.html" class="menu-link">Home</a></li>
-                    <li><a href="about.html" class="menu-link active">About</a></li>
-                    <li><a href="projects.html" class="menu-link">Projects</a></li>
-                    <li><a href="contact.html" class="menu-link">Contact</a></li>
+                    <li><a href="index.html" class="menu-link">
+                        <span class="menu-icon-box">01</span>
+                        <span class="menu-text">Home</span>
+                    </a></li>
+                    <li><a href="about.html" class="menu-link active">
+                        <span class="menu-icon-box">02</span>
+                        <span class="menu-text">About</span>
+                    </a></li>
+                    <li><a href="projects.html" class="menu-link">
+                        <span class="menu-icon-box">03</span>
+                        <span class="menu-text">Projects</span>
+                    </a></li>
+                    <li><a href="contact.html" class="menu-link">
+                        <span class="menu-icon-box">04</span>
+                        <span class="menu-text">Contact</span>
+                    </a></li>
                 </ul>
             </nav>
+            <div class="menu-footer">
+                <div class="menu-timeline">TIMELINE: 2025</div>
+            </div>
         </div>
     </div>
 
-    <!-- Add page transition indicators -->
-    <div class="page-transition-indicator prev"></div>
-    <div class="page-transition-indicator next"></div>
+    <!-- Page transition indicators -->
+    <div class="page-transition-indicator prev"><span class="indicator-text">PREV</span></div>
+    <div class="page-transition-indicator next"><span class="indicator-text">NEXT</span></div>
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/TextPlugin.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/about.js"></script>
     <script src="js/page-scroll.js"></script>
-</body>
-</html>

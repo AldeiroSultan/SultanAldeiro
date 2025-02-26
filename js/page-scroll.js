@@ -1,4 +1,4 @@
-// Advanced page scrolling functionality
+// Page scrolling functionality with smooth transitions
 document.addEventListener('DOMContentLoaded', function() {
     // Determine current page
     const currentPath = window.location.pathname;
@@ -14,25 +14,17 @@ document.addEventListener('DOMContentLoaded', function() {
     let isScrolling = false;
     let cooldown = false;
     let scrollAccumulator = 0;
-    const scrollThreshold = 400; // Adjusted threshold for better control
+    const scrollThreshold = 600; // Higher threshold for less sensitivity
     const transitionDuration = 1200; // 1.2 seconds transition
-    
-    // Add fade-in effect when page loads
-    document.body.style.opacity = '0';
-    document.body.style.transition = `opacity ${transitionDuration/1000}s ease`;
-    
-    setTimeout(function() {
-        document.body.style.opacity = '1';
-    }, 100);
     
     // ===== HOME PAGE SPECIFIC FUNCTIONALITY =====
     if (currentPage === 'index.html' || currentPage === '') {
         // Track scroll position to detect when we reach the bottom
-        let reachedBottom = false;
-        let scrollTimer;
+        let hasReachedBottom = false;
         
         // Function to check if we've reached the bottom
         function checkForBottom() {
+            // Get current scroll position
             const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
             const windowHeight = window.innerHeight;
             const documentHeight = Math.max(
@@ -43,36 +35,24 @@ document.addEventListener('DOMContentLoaded', function() {
             );
             
             // Check if we're at or very near the bottom
-            if (scrollPosition + windowHeight >= documentHeight - 20) {
-                if (!reachedBottom && !isScrolling && !cooldown) {
-                    reachedBottom = true;
+            if (scrollPosition + windowHeight >= documentHeight - 50) {
+                if (!hasReachedBottom && !isScrolling && !cooldown) {
+                    hasReachedBottom = true;
                     
                     // Wait a moment to let user see the bottom, then transition
                     setTimeout(() => {
-                        performSwipeUpTransition();
-                    }, 800);
+                        performTransitionToNextPage('up');
+                    }, 500);
                 }
             } else {
-                reachedBottom = false;
+                hasReachedBottom = false;
             }
         }
         
-        // Listen for scroll events with debounce
+        // Listen for scroll events
         window.addEventListener('scroll', function() {
-            clearTimeout(scrollTimer);
-            scrollTimer = setTimeout(checkForBottom, 150);
+            checkForBottom();
         });
-        
-        // Handle scroll indicator click
-        const scrollIndicator = document.querySelector('.scroll-indicator');
-        if (scrollIndicator) {
-            scrollIndicator.addEventListener('click', function() {
-                const introSection = document.getElementById('intro-section');
-                if (introSection) {
-                    introSection.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        }
     }
     
     // ===== ABOUT PAGE HORIZONTAL SCROLLING =====
@@ -85,17 +65,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 e.preventDefault();
                 
                 // More controlled, slower horizontal scrolling
-                horizontalContainer.scrollLeft += e.deltaY * 0.3;
+                horizontalContainer.scrollLeft += e.deltaY * 0.5;
                 
                 // Check if we're at the end of the horizontal content
                 const isAtEnd = (horizontalContainer.scrollLeft + horizontalContainer.clientWidth) >= 
-                               (horizontalContainer.scrollWidth - 30);
+                               (horizontalContainer.scrollWidth - 50);
                 
                 // When we reach the end and are still trying to scroll down, prepare for page transition
                 if (isAtEnd && e.deltaY > 0) {
                     scrollAccumulator += e.deltaY;
                     if (scrollAccumulator > scrollThreshold) {
-                        navigateToNextPage();
+                        performTransitionToNextPage('up');
                         scrollAccumulator = 0;
                     }
                 }
@@ -104,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (horizontalContainer.scrollLeft <= 10 && e.deltaY < 0) {
                     scrollAccumulator -= e.deltaY;
                     if (scrollAccumulator > scrollThreshold) {
-                        navigateToPreviousPage();
+                        performTransitionToPrevPage('down');
                         scrollAccumulator = 0;
                     }
                 }
@@ -113,7 +93,6 @@ document.addEventListener('DOMContentLoaded', function() {
             // Support keyboard arrow keys for horizontal scrolling
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'ArrowRight') {
-                    e.preventDefault();
                     horizontalContainer.scrollBy({
                         left: 100,
                         behavior: 'smooth'
@@ -121,15 +100,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     
                     // Check if we're at the end
                     const isAtEnd = (horizontalContainer.scrollLeft + horizontalContainer.clientWidth) >= 
-                                   (horizontalContainer.scrollWidth - 130);
+                                   (horizontalContainer.scrollWidth - 150);
                     
                     if (isAtEnd) {
-                        setTimeout(() => {
-                            navigateToNextPage();
-                        }, 500);
+                        performTransitionToNextPage('up');
                     }
                 } else if (e.key === 'ArrowLeft') {
-                    e.preventDefault();
                     horizontalContainer.scrollBy({
                         left: -100,
                         behavior: 'smooth'
@@ -137,109 +113,115 @@ document.addEventListener('DOMContentLoaded', function() {
                     
                     // Check if we're at the beginning
                     if (horizontalContainer.scrollLeft <= 100) {
-                        setTimeout(() => {
-                            navigateToPreviousPage();
-                        }, 500);
+                        performTransitionToPrevPage('down');
                     }
                 }
             });
         }
     }
     
-    // ===== PROJECTS PAGE SCROLLING =====
-    if (currentPage === 'projects.html') {
-        window.addEventListener('wheel', function(e) {
-            // At bottom scrolling down: go to next
-            if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight - 50 && e.deltaY > 0) {
-                scrollAccumulator += e.deltaY;
-                if (scrollAccumulator > scrollThreshold) {
-                    navigateToNextPage();
-                    scrollAccumulator = 0;
-                }
-            } 
-            // At top scrolling up: go to previous
-            else if (window.pageYOffset <= 10 && e.deltaY < 0) {
-                scrollAccumulator -= e.deltaY;
-                if (scrollAccumulator > scrollThreshold) {
-                    navigateToPreviousPage();
-                    scrollAccumulator = 0;
-                }
-            } else {
-                scrollAccumulator = 0; // Reset when just scrolling the page
-            }
-        });
-        
-        // Support keyboard navigation
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'ArrowDown' && window.innerHeight + window.pageYOffset >= document.body.offsetHeight - 50) {
-                navigateToNextPage();
-            } else if (e.key === 'ArrowUp' && window.pageYOffset <= 10) {
-                navigateToPreviousPage();
-            }
-        });
-    }
-    
     // ===== UNIVERSAL NAVIGATION FUNCTIONS =====
     
-    // Perform swipe up transition (used for home page)
-    function performSwipeUpTransition() {
+    // Transition to next page with smooth animation
+    function performTransitionToNextPage(direction) {
         if (isScrolling || cooldown) return;
         
         isScrolling = true;
         cooldown = true;
         
-        // Create a swipe up transition overlay
+        // Create a transition overlay element
         const overlay = document.createElement('div');
-        overlay.style.position = 'fixed';
-        overlay.style.top = '100%';
-        overlay.style.left = '0';
-        overlay.style.width = '100%';
-        overlay.style.height = '100%';
-        overlay.style.backgroundColor = 'var(--color-accent)';
-        overlay.style.zIndex = '9999';
-        overlay.style.transition = 'transform 1.2s cubic-bezier(0.76, 0, 0.24, 1)';
+        overlay.className = 'page-transition-overlay';
+        
+        if (direction === 'up') {
+            // Coming from bottom
+            overlay.style.top = '100%';
+            overlay.style.transform = 'translateY(0)';
+        } else {
+            // Default side animation
+            overlay.style.transform = 'translateY(100%)';
+        }
+        
         document.body.appendChild(overlay);
         
-        // Animate the overlay to swipe up
-        setTimeout(() => {
-            overlay.style.transform = 'translateY(-100%)';
-        }, 100);
-        
-        // After animation completes, navigate to next page
-        setTimeout(() => {
-            window.location.href = pageSequence[currentIndex + 1];
-        }, 1000);
-    }
-    
-    // Navigate to the next page with fade transition
-    function navigateToNextPage() {
-        if (currentIndex < pageSequence.length - 1 && !isScrolling && !cooldown) {
-            isScrolling = true;
-            cooldown = true;
-            
-            // Fade out current page
-            document.body.style.opacity = '0';
-            
-            // Navigate to next page with delay
-            setTimeout(function() {
-                window.location.href = pageSequence[currentIndex + 1];
-            }, transitionDuration);
+        // Animate transition
+        if (direction === 'up') {
+            gsap.to(overlay, {
+                top: '0%',
+                duration: 1.2,
+                ease: "power3.inOut",
+                onComplete: function() {
+                    navigateToNextPage();
+                }
+            });
+        } else {
+            gsap.to(overlay, {
+                y: '-100%',
+                duration: 1.2,
+                ease: "power3.inOut",
+                onComplete: function() {
+                    navigateToNextPage();
+                }
+            });
         }
     }
     
-    // Navigate to the previous page with fade transition
-    function navigateToPreviousPage() {
-        if (currentIndex > 0 && !isScrolling && !cooldown) {
-            isScrolling = true;
-            cooldown = true;
-            
-            // Fade out current page
-            document.body.style.opacity = '0';
-            
-            // Navigate to previous page with delay
-            setTimeout(function() {
-                window.location.href = pageSequence[currentIndex - 1];
-            }, transitionDuration);
+    // Transition to previous page
+    function performTransitionToPrevPage(direction) {
+        if (isScrolling || cooldown) return;
+        
+        isScrolling = true;
+        cooldown = true;
+        
+        // Create transition overlay
+        const overlay = document.createElement('div');
+        overlay.className = 'page-transition-overlay';
+        
+        if (direction === 'down') {
+            // Coming from top
+            overlay.style.bottom = '100%';
+            overlay.style.top = 'auto';
+            overlay.style.transform = 'translateY(0)';
+        } else {
+            // Default side animation
+            overlay.style.transform = 'translateY(-100%)';
+        }
+        
+        document.body.appendChild(overlay);
+        
+        // Animate transition
+        if (direction === 'down') {
+            gsap.to(overlay, {
+                bottom: '0%',
+                duration: 1.2,
+                ease: "power3.inOut",
+                onComplete: function() {
+                    navigateToPrevPage();
+                }
+            });
+        } else {
+            gsap.to(overlay, {
+                y: '100%',
+                duration: 1.2,
+                ease: "power3.inOut",
+                onComplete: function() {
+                    navigateToPrevPage();
+                }
+            });
+        }
+    }
+    
+    // Navigate to the next page in sequence
+    function navigateToNextPage() {
+        if (currentIndex < pageSequence.length - 1) {
+            window.location.href = pageSequence[currentIndex + 1];
+        }
+    }
+    
+    // Navigate to the previous page in sequence
+    function navigateToPrevPage() {
+        if (currentIndex > 0) {
+            window.location.href = pageSequence[currentIndex - 1];
         }
     }
     
@@ -251,97 +233,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }, transitionDuration + 500);
     }
     
-    // ===== PAGE NAVIGATION ELEMENTS =====
-    
-    // Set up click handlers for transitioning between pages
-    
-    // Handle timeline end click (for about page)
-    const timelineEnd = document.querySelector('.timeline-end');
-    if (timelineEnd) {
-        timelineEnd.addEventListener('click', function() {
-            navigateToNextPage();
-        });
-    }
-    
-    // Handle next link click (for projects page)
-    const nextLink = document.querySelector('.next-link');
-    if (nextLink) {
-        nextLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            navigateToNextPage();
-        });
-    }
-    
-    // Handle continue hint click
-    const scrollContinueHint = document.querySelector('.scroll-continue-hint');
-    if (scrollContinueHint) {
-        scrollContinueHint.addEventListener('click', function() {
-            navigateToNextPage();
-        });
-    }
-    
-    // Set up page transition indicators
-    const nextIndicator = document.querySelector('.page-transition-indicator.next');
-    const prevIndicator = document.querySelector('.page-transition-indicator.prev');
-    
-    if (nextIndicator) {
-        nextIndicator.addEventListener('click', function() {
-            if (!isScrolling && !cooldown) {
-                // Animate button for feedback
-                this.style.transform = 'translateY(-50%) scale(1.2)';
-                setTimeout(() => {
-                    this.style.transform = 'translateY(-50%) scale(1)';
-                }, 200);
-                
-                // Use swipe animation for home page
-                if (currentPage === 'index.html' || currentPage === '') {
-                    performSwipeUpTransition();
-                } else {
-                    navigateToNextPage();
-                }
-            }
-        });
-    }
-    
-    if (prevIndicator) {
-        prevIndicator.addEventListener('click', function() {
-            if (!isScrolling && !cooldown) {
-                // Animate button for feedback
-                this.style.transform = 'translateY(-50%) scale(1.2)';
-                setTimeout(() => {
-                    this.style.transform = 'translateY(-50%) scale(1)';
-                }, 200);
-                
-                navigateToPreviousPage();
-            }
-        });
-    }
-    
-    // Hide indicators if we're at the beginning or end of sequence
-    if (currentIndex === 0 && prevIndicator) {
-        prevIndicator.style.display = 'none';
-    }
-    
-    if (currentIndex === pageSequence.length - 1 && nextIndicator) {
-        nextIndicator.style.display = 'none';
-    }
-    
-    // Support keyboard navigation for all pages
-    document.addEventListener('keydown', function(e) {
-        // Skip if we're in the about page (handled separately)
-        if (currentPage === 'about.html') return;
-        
-        // Down or Right arrow key for next page
-        if ((e.key === 'ArrowDown' || e.key === 'ArrowRight') && !isScrolling && !cooldown) {
-            if (currentPage === 'index.html' || currentPage === '') {
-                performSwipeUpTransition();
-            } else {
-                navigateToNextPage();
-            }
-        }
-        // Up or Left arrow key for previous page
-        else if ((e.key === 'ArrowUp' || e.key === 'ArrowLeft') && !isScrolling && !cooldown) {
-            navigateToPreviousPage();
-        }
-    });
+    // Initialize cooldown after page load
+    setCooldown();
 });
