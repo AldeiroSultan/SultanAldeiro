@@ -12,6 +12,10 @@
         display: flex;
         flex-direction: column;
         font-family: "SF Pro Text", "SF Pro Icons", "AOS Icons", "Helvetica Neue", Helvetica, Arial, sans-serif, system-ui;
+        background: #0a0f0f;
+        color: #ffffff;
+        margin: 0;
+        padding: 0;
     }
     
     header {
@@ -19,32 +23,8 @@
         position: sticky;
         top: 0;
         z-index: 4;
-        background: linear-gradient(white 50%, transparent);
+        background: linear-gradient(#0a0f0f 50%, transparent);
         margin-bottom: 4rem;
-    }
-    
-    ol {
-        cursor: none;
-        padding: 0;
-        margin: 0;
-    }
-    
-    @counter-style pad-tens {
-        system: extends decimal;
-        suffix: ". ";
-        pad: 2 "0";
-    }
-    
-    li:not(:last-of-type) {
-        border-bottom: 2px solid hsl(0 0% 10% / 0.5);
-    }
-    
-    li::marker {
-        font-size: clamp(.875rem, 1vw + 1rem, 2rem);
-        font-family: monospace;
-        vertical-align: middle;
-        font-weight: 100;
-        color: hsl(0 0% 10% / 0.5);
     }
     
     main {
@@ -53,11 +33,16 @@
     
     :root {
         --font-size: clamp(2rem, 8vw + 1rem, 10rem);
+        --accent: hsl(8 100% 55%);
+        --white: hsl(0 0% 100%);
+        --x: 0;
+        --y: 0;
     }
     
     h1 {
         font-size: var(--font-size);
         margin: 0;
+        color: var(--white);
     }
     
     h1 span:nth-of-type(1) {
@@ -70,71 +55,6 @@
         text-transform: uppercase;
     }
     
-    li:is(:hover, :focus-within) {
-        opacity: 1;
-        z-index: 2;
-    }
-    
-    li:hover {
-        --active: 1;
-    }
-    
-    li:has(~ li:is(:hover, :focus-within)),
-    li:is(:hover, :focus-within) ~ li {
-        opacity: 0.25;
-    }
-    
-    li img {
-        opacity: var(--active, 0);
-        position: fixed;
-        pointer-events: none;
-        left: calc(var(--x) * 1px + 150px); /* Offset 150px to the right */
-        top: calc(var(--y) * 1px);
-        translate: -50% -50%;
-        cursor: none;
-        border-radius: 6px;
-        z-index: 6;
-    }
-    
-    a {
-        padding: 2rem 0;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        text-decoration: none;
-        color: hsl(0 0% 10%);
-        font-weight: 300;
-        cursor: none;
-    }
-    
-    li:is(:hover, :focus-within) {
-        border-bottom-color: #0000;
-    }
-    
-    a:focus-visible {
-        outline-color: hsl(0 100% 50%);
-        outline-offset: 0.5rem;
-    }
-    
-    a span {
-        font-size: clamp(.875rem, 0.5vw + 1rem, 2rem);
-        flex: 0 0 auto;
-    }
-    
-    ol {
-        font-size: clamp(1.25rem, 2vw + 1rem, 2rem);
-    }
-    
-    li {
-        position: relative;
-    }
-    
-    :root:has(li:nth-of-type(10)) {
-        ol {
-          list-style-type: pad-tens;
-        }
-    }
-    
     section {
         width: 800px;
         max-width: calc(100% - 8rem);
@@ -144,5 +64,286 @@
     footer {
         padding: 2rem;
         text-align: center;
+        color: var(--white);
+        opacity: 0.8;
+    }
+    
+    /* Experience List Styles */
+    .posts-list {
+        cursor: default;
+        padding: 0;
+        margin: 0;
+        list-style-type: decimal;
+        font-size: clamp(1.25rem, 2vw + 1rem, 2rem);
+        counter-reset: item;
+    }
+    
+    .experience-item {
+        position: relative;
+        counter-increment: item;
+        border-bottom: 2px solid hsla(0, 0%, 100%, 0.2);
+        transition: all 0.3s ease;
+    }
+    
+    .experience-item:last-child {
+        border-bottom: none;
+    }
+    
+    .experience-item::marker {
+        font-size: clamp(0.875rem, 1vw + 1rem, 2rem);
+        font-family: monospace;
+        vertical-align: middle;
+        font-weight: 100;
+        color: hsla(0, 0%, 100%, 0.5);
+    }
+    
+    /* Experience Header Styles */
+    .experience-header {
+        position: relative;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .experience-link {
+        padding: 2rem 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        text-decoration: none;
+        color: var(--white);
+        font-weight: 300;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+    
+    .experience-title {
+        flex: 1;
+        margin-right: 2rem;
+    }
+    
+    .experience-date {
+        font-size: clamp(0.875rem, 0.5vw + 1rem, 2rem);
+        flex: 0 0 auto;
+        position: relative;
+        z-index: 2;
+    }
+    
+    /* Hover Image Styles - Now positioned over dates */
+    .hover-image {
+        opacity: 0;
+        position: absolute;
+        pointer-events: none;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 3;
+        border-radius: 8px;
+        width: 200px;
+        height: 150px;
+        object-fit: cover;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* Hover Effects */
+    .experience-item:hover .hover-image {
+        opacity: 1;
+        transform: translateY(-50%) scale(1.05);
+    }
+    
+    .experience-item:hover {
+        opacity: 1;
+        z-index: 2;
+        border-bottom-color: transparent;
+    }
+    
+    .experience-item:hover .experience-date {
+        opacity: 0.3;
+    }
+    
+    .experience-item:has(~ .experience-item:hover),
+    .experience-item:hover ~ .experience-item {
+        opacity: 0.25;
+    }
+    
+    /* Expandable Panel Styles */
+    .experience-panel {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                    padding 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border-radius: 0 0 12px 12px;
+    }
+    
+    .experience-item.expanded .experience-panel {
+        max-height: 600px;
+        padding: 2rem;
+    }
+    
+    .panel-content {
+        display: grid;
+        grid-template-columns: 1fr 1.5fr;
+        gap: 2rem;
+        align-items: start;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.3s ease 0.1s, transform 0.3s ease 0.1s;
+    }
+    
+    .experience-item.expanded .panel-content {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    .panel-image img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .panel-description h3 {
+        margin: 0 0 1rem 0;
+        color: var(--accent);
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+    
+    .panel-description p {
+        margin: 0 0 1.5rem 0;
+        line-height: 1.6;
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 1rem;
+    }
+    
+    .panel-skills {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .panel-skills li {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.875rem;
+        color: rgba(255, 255, 255, 0.8);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
+    }
+    
+    .panel-skills li:hover {
+        background: rgba(255, 255, 255, 0.2);
+        color: var(--white);
+        transform: translateY(-2px);
+    }
+    
+    /* Expanded State Styles */
+    .experience-item.expanded {
+        background: rgba(255, 255, 255, 0.02);
+        border-radius: 12px 12px 0 0;
+        border-bottom-color: transparent;
+    }
+    
+    .experience-item.expanded .experience-header {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 12px 12px 0 0;
+    }
+    
+    .experience-item.expanded .experience-link {
+        color: var(--accent);
+    }
+    
+    /* Hide hover image when expanded */
+    .experience-item.expanded .hover-image {
+        opacity: 0 !important;
+    }
+    
+    /* Counter styles for numbers */
+    @counter-style pad-tens {
+        system: extends decimal;
+        suffix: ". ";
+        pad: 2 "0";
+    }
+    
+    :root:has(.experience-item:nth-of-type(10)) .posts-list {
+        list-style-type: pad-tens;
+    }
+    
+    /* Active state for clicked items */
+    .experience-item.expanding {
+        transform: scale(1.02);
+    }
+    
+    /* Smooth transitions for all state changes */
+    .experience-item {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .panel-content {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        .panel-image img {
+            height: 150px;
+        }
+        
+        .experience-item.expanded .experience-panel {
+            max-height: 800px;
+            padding: 1.5rem;
+        }
+        
+        .hover-image {
+            width: 150px;
+            height: 100px;
+        }
+        
+        .experience-link {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+        
+        .experience-title {
+            margin-right: 0;
+        }
+        
+        .experience-date {
+            align-self: flex-end;
+        }
+        
+        section {
+            max-width: calc(100% - 4rem);
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .experience-item.expanded .experience-panel {
+            padding: 1rem;
+        }
+        
+        .panel-skills {
+            gap: 0.25rem;
+        }
+        
+        .panel-skills li {
+            padding: 0.25rem 0.75rem;
+            font-size: 0.75rem;
+        }
+        
+        .hover-image {
+            width: 120px;
+            height: 80px;
+        }
     }
 }
