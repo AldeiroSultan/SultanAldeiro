@@ -1,0 +1,227 @@
+@import url('https://fonts.googleapis.com/css?family=Cormorant+Garamond:400,500,500i,600,600i,700,700i|Cormorant+SC:400,500,600,700');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/css/swiper.min.css');
+
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Cormorant Garamond', serif;
+  background-color: #fff;
+}
+
+/* Slider container */
+#home-slider {
+  height: 80vh;
+  width: 90vw;
+  position: relative;
+  margin: 2rem auto;
+}
+
+.swiper-container {
+  height: 100%;
+  width: 100%;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+/* Slides */
+.swiper-slide {
+  display: flex;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.swiper-image {
+  width: 50%;
+  height: 100%;
+}
+
+.swiper-image-inner {
+  background-size: cover;
+  background-position: center center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* Left side styling */
+.swiper-image-inner.swiper-image-left {
+  padding: 4rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  background-blend-mode: overlay;
+  /* Use a placeholder background image */
+  background-image: url('/api/placeholder/800/1200');
+  filter: sepia(100%);
+  transition: all 1s linear;
+  transition-delay: 1s;
+}
+
+.swiper-slide.swiper-slide-active .swiper-image-left {
+  filter: sepia(0%);
+}
+
+/* Right side styling */
+.swiper-image-inner.swiper-image-right {
+  background-color: rgba(0, 0, 0, 0.5);
+  background-blend-mode: multiply;
+  /* Use a placeholder background image */
+  background-image: url('/api/placeholder/800/1200');
+  filter: hue-rotate(-60deg);
+  transition: all 1s linear;
+  transition-delay: 1s;
+}
+
+.swiper-slide.swiper-slide-active .swiper-image-right {
+  filter: hue-rotate(90deg);
+}
+
+/* Typography */
+h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  color: #fff;
+  align-self: flex-start;
+  margin: 0 0 auto 0;
+  font-size: 4.5rem;
+  line-height: 1;
+  transition: all .8s cubic-bezier(0.215, 0.61, 0.355, 1) 1.1s;
+  transform: translate3d(-20%, 0, 0);
+  opacity: 0;
+}
+
+h1 span.emphasis {
+  font-weight: 700;
+  font-style: italic;
+  opacity: 0;
+  transition: all .8s cubic-bezier(0.215, 0.61, 0.355, 1) 1.2s;
+  transform: translate3d(-20%, 0, 0);
+  display: inline-block;
+}
+
+h1 span:not(.emphasis) {
+  font-size: 3.5rem;
+}
+
+h1 + p {
+  font-family: 'Cormorant SC', serif;
+  font-size: 14px;
+  letter-spacing: 2px;
+  margin: 0;
+  line-height: 1;
+  margin-bottom: auto;
+  align-self: flex-end;
+  text-transform: uppercase;
+  transition: all .8s cubic-bezier(0.215, 0.61, 0.355, 1) 1.3s;
+  transform: translate3d(-20%, 0, 0);
+  opacity: 0;
+  font-weight: 500;
+  color: #fff;
+  padding-right: 8rem;
+}
+
+p.paragraph {
+  margin: 0;
+  font-family: 'Cormorant Garamond', serif;
+  color: #fff;
+  width: 100%;
+  max-width: 350px;
+  text-align: justify;
+  font-size: 1.2rem;
+  font-weight: 500;
+  opacity: 0;
+  transition: all .6s cubic-bezier(0.215, 0.61, 0.355, 1) 1.4s;
+  transform: translate3d(-20%, 0, 0);
+}
+
+/* Active slide animations */
+.swiper-slide.swiper-slide-active h1,
+.swiper-slide.swiper-slide-active p.paragraph,
+.swiper-slide.swiper-slide-active h1 span.emphasis,
+.swiper-slide.swiper-slide-active h1 + p {
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
+}
+
+/* Pagination styling */
+.swiper-pagination-bullet {
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+  background: #000;
+  opacity: 0.4;
+}
+
+.swiper-pagination-bullet-active {
+  opacity: 1;
+  background: #000;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 1280px) {
+  h1 {
+    font-size: 3.9rem;
+  }
+  h1 span:not(.emphasis) {
+    font-size: 2.9rem;
+  }
+  h1 + p {
+    font-size: 13px;
+  }
+  p.paragraph {
+    font-size: 1rem;
+    line-height: 1.3;
+  }
+}
+
+@media screen and (max-width: 960px) {
+  h1 {
+    font-size: 3.5rem;
+  }
+  h1 span:not(.emphasis) {
+    font-size: 2.5rem;
+  }
+  p.paragraph {
+    max-width: 90%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .swiper-image {
+    width: 100%;
+    height: 50%;
+  }
+  
+  .swiper-slide {
+    flex-direction: column;
+  }
+  
+  .swiper-image-inner.swiper-image-left {
+    padding: 2rem;
+  }
+  
+  h1 {
+    font-size: 3.2rem;
+    align-self: center;
+  }
+  
+  h1 span:not(.emphasis) {
+    font-size: 2.1rem;
+  }
+  
+  p.paragraph {
+    max-width: 94%;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  #home-slider {
+    height: 86vh;
+    width: 96vw;
+  }
+}

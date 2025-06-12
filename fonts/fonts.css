@@ -1,0 +1,60 @@
+/* ============================================
+   FONT FACE DECLARATIONS
+   ============================================ */
+
+/* Migha Bold Expanded CNTR for headings and bold text */
+@font-face {
+  font-family: 'Migha-BoldExpandedCNTR';
+  src: url('../fonts/Migha-BoldExpandedCNTR.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Import Azeret Mono from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;500;600&display=swap');
+
+/* ============================================
+   FONT FAMILIES - CRITICAL SECTION
+   ============================================ */
+
+/* Global font overrides - these have the highest specificity */
+html body h1, 
+html body h2, 
+html body h3, 
+html body h4, 
+html body h5, 
+html body h6,
+html body .title,
+html body .page-title,
+html body .section-title,
+html body strong, 
+html body b,
+html body .nav-menu a {
+  font-family: 'Migha-BoldExpandedCNTR', Arial, sans-serif !important;
+}
+
+html body, 
+html body p, 
+html body div, 
+html body span, 
+html body li:not(.nav-menu li),
+html body .subtitle, 
+html body .caption, 
+html body .info, 
+html body .subheading, 
+html body .paragraph {
+  font-family: 'Azeret Mono', monospace !important;
+}
+
+/* Additional specific element overrides */
+html body .nav-menu a {
+  font-family: 'Migha-BoldExpandedCNTR', Arial, sans-serif !important;
+}
+
+/* Fix for any elements that specifically need Azeret Mono */
+html body .info, 
+html body .subtitle, 
+html body .caption {
+  letter-spacing: 0.02em; /* Slight adjustment for monospace readability */
+}
